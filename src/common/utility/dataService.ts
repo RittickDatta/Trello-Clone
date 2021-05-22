@@ -32,6 +32,7 @@ export const getBoardData = (boardId: string) => {
 }
 
 export const addListToBoard = (data: List, boardId: string) => {
+    console.log('In add list to board')
     let localData = localStorage.getItem('trelloData')
     localData = localData && JSON.parse(localData) || []
     let updatedLocalData = [...JSON.parse(JSON.stringify(localData))]
@@ -40,9 +41,26 @@ export const addListToBoard = (data: List, boardId: string) => {
     if(boardToUpdate.lists && boardToUpdate.lists.length > 0) {
         updatedList = [...boardToUpdate.lists, data]
     } else {
+        console.log('HERE')
         updatedList = [data] 
     }
-    boardToUpdate.lists = updatedList;
+
+    let filteredList:any = []
+    updatedList.forEach((list) => {
+        if(list.title.length > 0) {
+            let check = false;
+            filteredList.forEach((l:any) => {
+                if(l.id === list.id){
+                    check = true;
+                }
+            })
+            if(!check) {
+                filteredList.push(list)
+            }
+        }
+    })
+
+    boardToUpdate.lists = filteredList;
     const boardIndex = updatedLocalData.findIndex((board) => board.id === boardId)
     updatedLocalData.splice(boardIndex, 1, boardToUpdate);
     console.log(updatedLocalData)
@@ -61,13 +79,15 @@ export const addCardToList = (data: Card, boardId: string, listId: string) => {
     console.log('List to update', listToUpdate)
     let updatedCards;
     if(listToUpdate.cards){
-        updatedCards = [...listToUpdate, data]
+        updatedCards = [...listToUpdate.cards, data]
     } else {
         updatedCards = [data]
     }
     listToUpdate.cards = updatedCards;
     console.log('Updated List',listToUpdate)
-    boardToUpdate.lists = [...boardToUpdate.lists, listToUpdate];
+    const listIndex = boardToUpdate.lists.findIndex((list:any) => list.id === listId)
+    // boardToUpdate.lists = [...boardToUpdate.lists, listToUpdate];
+    boardToUpdate.lists = boardToUpdate.lists.splice(listIndex, 1, listToUpdate);
     console.log(boardToUpdate);
 
     const boardIndex = updatedLocalData.findIndex((board) => board.id === boardId)

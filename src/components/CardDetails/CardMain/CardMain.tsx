@@ -36,11 +36,11 @@ function CardMain({
             <label htmlFor="title">
                 Title
                 <input type="text" name="title" value={title} onChange={(e) => handleChange(e, 'title')} />
-            </label>
+            </label><br></br>
             <label htmlFor="description">
                 Description
                 <input type="text" name="description" value={description} onChange={(e) => handleChange(e, 'description')} />
-            </label>
+            </label><br></br>
             <input type="submit" value="Done" />
             </form>
         </div>
