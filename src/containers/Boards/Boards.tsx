@@ -4,7 +4,7 @@ export class Boards extends Component {
     render() {
         return (
             <div>
-                
+                Boards
             </div>
         )
     }
