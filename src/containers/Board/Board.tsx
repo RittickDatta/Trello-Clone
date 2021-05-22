@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 
 import { Board as BoardInterface} from "../../common/interfaces/Board";
 import { Card } from '../../common/interfaces/Card';
-import { loadData } from '../../common/utility/dataService';
+import { List } from '../../common/interfaces/List';
+import { addCardToList, addListToBoard, loadData } from '../../common/utility/dataService';
 
 import ListContainer from "../../components/ListContainer/ListContainer";
 
 interface Props {
     board: BoardInterface,
-    boardSequence: number
+    boardId: string
 }
 export class Board extends Component<Props> {
 
@@ -23,12 +24,23 @@ export class Board extends Component<Props> {
         })
     }
 
-    addListHandler = (title: string) => {
+    addListHandler = (e:any, list: List) => {
+        e.preventDefault();
+        console.log(list);
+
+        const { boardId } = this.props;
         
+        addListToBoard(list, boardId)
     }
 
-    addCardHandler = (card: Card) => {
-        
+    addCardHandler = (e:any, listId: string, card: Card) => {
+        e.preventDefault();
+        console.log(listId);
+
+        const { boardId } = this.props;
+
+        addCardToList(card, boardId, listId)
+
     }
 
     showCardDetails = (card: Card) => {
@@ -39,7 +51,7 @@ export class Board extends Component<Props> {
     render() {
         const {
             board,
-            boardSequence
+            boardId
         } = this.props;
         return (
             <div>

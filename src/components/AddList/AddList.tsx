@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import {uuid} from 'uuidv4'
 interface Props {
     addListHandler: Function
 }
@@ -25,8 +25,10 @@ export class AddList extends Component<Props, State> {
 
         return (
             <div>
-                <form onClick={() => addListHandler(title)}>
+                <form onClick={(e) => addListHandler(e, {id:uuid(), title})}>
+                    <label htmlFor="title">Title</label>
                     <input type="text" name="title" onChange={this.handleChange}/>
+                    <input type="submit" value="Add List" />
                 </form>
             </div>
         )

@@ -13,13 +13,13 @@ interface Props {
 function ListContainer({lists, addCardHandler, showCardDetails, addListHandler}:Props) {
 
     const renderLists = (lists: ListInterface[]) => {
-        return lists.map((list, index) => {
+        return lists && lists.map((list, index) => {
             return <List 
                 title={list.title}
                 cards={list.cards || []}
                 addCardHandler={addCardHandler}
                 showCardDetails={showCardDetails}
-                listSequence={index}
+                listId={list.id}
             />
         })
     }

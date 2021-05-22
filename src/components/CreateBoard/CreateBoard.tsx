@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { uuid } from 'uuidv4';
 interface Props {
     createBoardHandler: Function;
 }
@@ -28,7 +28,10 @@ export class CreateBoard extends Component<Props, State> {
         const { createBoardHandler } = this.props;
         return (
             <div>
-                <form onSubmit={(e) => createBoardHandler(e, {title: this.state.title})}>
+                <form onSubmit={(e) => createBoardHandler(e, {
+                    id: uuid(),
+                    title: this.state.title
+                    })}>
                     <input type="text" name="title" onChange={e => this.handleChange(e)}/>
                     <input type="submit" value="Create Board" />
                 </form>

@@ -23,7 +23,7 @@ export class Boards extends Component<State> {
 
   renderBoards = (boards: BoardsInterface[]) => {
     return boards.map((board, index) => {
-      return <Board board={board} boardSequence={index} />;
+      return <Board key={board.id} board={board} boardId={board.id} />;
     });
   };
 

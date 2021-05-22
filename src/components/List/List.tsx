@@ -2,15 +2,16 @@ import React from 'react'
 import { Card as CardInterface } from '../../common/interfaces/Card'
 import Card from '../Card/Card'
 
+import { uuid } from "uuidv4";
 interface Props {
     title: string;
     cards: CardInterface[];
     addCardHandler: Function;
     showCardDetails: Function;
-    listSequence: number
+    listId: string
 }
 
-function List({title, cards, addCardHandler, showCardDetails, listSequence}: Props) {
+function List({title, cards, addCardHandler, showCardDetails, listId}: Props) {
 
     const renderCards = (cards: CardInterface[]) => {
         return cards.map((card, index) => {
@@ -24,7 +25,7 @@ function List({title, cards, addCardHandler, showCardDetails, listSequence}: Pro
     return (
         <div>
             <h2>{title}</h2>
-            <span onClick={() => addCardHandler(listSequence)}>+Add Card</span>
+            <span onClick={(e) => addCardHandler(e, listId, {id: uuid(), title: '', listName: title})}>+Add Card</span>
             {renderCards(cards)}
         </div>
     )
