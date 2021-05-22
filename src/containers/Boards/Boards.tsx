@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { Boards as BoardsInterface } from "../../common/interfaces/Boards";
+import { Board as BoardsInterface } from "../../common/interfaces/Board";
+
+import { loadData } from "../../common/utility/dataService";
 interface State {
     boards: BoardsInterface[]
 }
@@ -9,7 +11,7 @@ export class Boards extends Component<State> {
     }
 
     componentDidMount(){
-        
+        loadData();
     }
 
     render() {
