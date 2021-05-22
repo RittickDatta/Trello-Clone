@@ -13,12 +13,12 @@ import Button from "../../common/ui/Button/Button";
 
 interface Props {
     card: CardInterface,
-    showCardDetails: Function
+    showCardDetails: Function,
  }
 function Card(
     {
         card,
-        showCardDetails
+        showCardDetails,
     } : Props
 ) {
     const { title, listName} = card;

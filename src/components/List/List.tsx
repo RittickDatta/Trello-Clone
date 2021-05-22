@@ -6,10 +6,11 @@ interface Props {
     title: string;
     cards: CardInterface[];
     addCardHandler: Function;
-    showCardDetails: Function
+    showCardDetails: Function;
+    listSequence: number
 }
 
-function List({title, cards, addCardHandler, showCardDetails}: Props) {
+function List({title, cards, addCardHandler, showCardDetails, listSequence}: Props) {
 
     const renderCards = (cards: CardInterface[]) => {
         return cards.map((card, index) => {
@@ -23,7 +24,7 @@ function List({title, cards, addCardHandler, showCardDetails}: Props) {
     return (
         <div>
             <h2>{title}</h2>
-            <span onClick={() => addCardHandler()}>+Add Card</span>
+            <span onClick={() => addCardHandler(listSequence)}>+Add Card</span>
             {renderCards(cards)}
         </div>
     )

@@ -23,12 +23,17 @@ export class Board extends Component<Props> {
         })
     }
 
-    addCardHandler = (card: Card) => {
+    addListHandler = (title: string) => {
+        
+    }
 
+    addCardHandler = (card: Card) => {
+        
     }
 
     showCardDetails = (card: Card) => {
         console.log(card);
+        // CardDetails
     }
 
     render() {
@@ -42,6 +47,7 @@ export class Board extends Component<Props> {
 
                 <ListContainer
                     lists={board.lists || []}
+                    addListHandler={this.addListHandler}
                     addCardHandler={this.addCardHandler}
                     showCardDetails={this.showCardDetails}
                 />

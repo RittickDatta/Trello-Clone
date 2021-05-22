@@ -1,4 +1,6 @@
 import { Board } from "../interfaces/Board";
+import { Card } from "../interfaces/Card";
+import { List } from "../interfaces/List";
 
 export const checkLocalStorage = () => {
     let isInitialState = JSON.parse(JSON.stringify(localStorage.getItem('trelloData'))).length > 0;
@@ -29,11 +31,11 @@ export const getBoardData = (boardId: string) => {
 
 }
 
-export const addListToBoard = (boardId: string) => {
+export const addListToBoard = (data: List, boardId: string) => {
 
 }
 
-export const addCardToList = (boardId: string, listId: string) => {
+export const addCardToList = (data: Card, boardId: string, listId: string) => {
 
 }
 

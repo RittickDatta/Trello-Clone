@@ -6,11 +6,11 @@ import List from '../List/List';
 interface Props {
     lists: ListInterface[],
     addCardHandler: Function,
-    showCardDetails: Function
-
+    showCardDetails: Function,
+    addListHandler: Function
 }
 
-function ListContainer({lists, addCardHandler, showCardDetails}:Props) {
+function ListContainer({lists, addCardHandler, showCardDetails, addListHandler}:Props) {
 
     const renderLists = (lists: ListInterface[]) => {
         return lists.map((list, index) => {
@@ -19,6 +19,7 @@ function ListContainer({lists, addCardHandler, showCardDetails}:Props) {
                 cards={list.cards || []}
                 addCardHandler={addCardHandler}
                 showCardDetails={showCardDetails}
+                listSequence={index}
             />
         })
     }
@@ -26,7 +27,9 @@ function ListContainer({lists, addCardHandler, showCardDetails}:Props) {
     return (
         <div>
             {renderLists(lists)}
-            <AddList />
+            <AddList 
+                addListHandler={addListHandler}
+            />
         </div>
     )
 }
