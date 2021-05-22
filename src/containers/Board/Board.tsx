@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { Board as BoardInterface} from "../../common/interfaces/Board";
 import { Card } from '../../common/interfaces/Card';
 import { List } from '../../common/interfaces/List';
-import { addCardToList, addListToBoard, loadData } from '../../common/utility/dataService';
+import { addCardToList, addListToBoard, loadData, moveCard } from '../../common/utility/dataService';
 
 import ListContainer from "../../components/ListContainer/ListContainer";
 
@@ -51,6 +51,11 @@ export class Board extends Component<Props> {
         console.log({card, listId, boardId});
     }
 
+    moveCardHandler = (e:any, card: Card, cardId: string, listId: string, boardId: string) => {
+        console.log(cardId, listId, boardId);
+        moveCard(card, cardId, listId, boardId)
+    }
+
     showCardDetails = (card: Card) => {
         console.log(card);
         // CardDetails
@@ -73,6 +78,7 @@ export class Board extends Component<Props> {
                     // showCardDetails={this.showCardDetails}
                     handleCardTitleChange={this.handleCardTitleChange}
                     handleEditCard={this.handleEditCard}
+                    moveCardHandler={this.moveCardHandler}
                 />
             </div>
         )

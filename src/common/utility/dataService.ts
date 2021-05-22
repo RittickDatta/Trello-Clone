@@ -76,6 +76,56 @@ export const addCardToList = (data: Card, boardId: string, listId: string) => {
     localStorage.setItem('trelloData', JSON.stringify(updatedLocalData))
 }
 
+export const moveCard = (card: Card, cardId: string, listId: string, boardId: string) => {
+    console.log(cardId, listId, boardId)
+
+    //Get Local Data
+    let localData = localStorage.getItem('trelloData')
+    localData = localData && JSON.parse(localData) || []
+    let updatedLocalData = [...JSON.parse(JSON.stringify(localData))]
+    console.log('Local Data------->',updatedLocalData)
+
+    //Get Board
+    let boardToUpdate = updatedLocalData.filter((board) => board.id === boardId)[0];
+    console.log('Board to update', boardToUpdate)
+
+    //Get List
+    let listToUpdate = boardToUpdate.lists.filter((list:any) => list.id === listId)[0];
+    console.log('List to update', listToUpdate)
+
+    //Remove from above list
+    const cardIndex = listToUpdate.cards.findIndex((card:any) => card.id === cardId)
+    listToUpdate.cards.splice(cardIndex, 1)
+
+    boardToUpdate.lists = [...boardToUpdate.lists, listToUpdate];
+    console.log('Board to update lists',boardToUpdate.lists)
+    // Get List index
+    let listIndex = boardToUpdate.lists.findIndex((list:any) => list.id === listId)
+    listIndex += 1;
+
+    //Get next list
+    let nextListToUpdate = boardToUpdate.lists[listIndex];
+    console.log('nextListToUpdate-->', boardToUpdate.lists, listIndex)
+
+    // Update cards
+    let updatedCards = (nextListToUpdate.card && nextListToUpdate.card.length > 0) && [...nextListToUpdate.cards, card] 
+
+    // Add to this list
+    nextListToUpdate.cards = (nextListToUpdate.card && nextListToUpdate.card.length > 0) && updatedCards;
+
+    // Update board list
+    boardToUpdate.lists = [...boardToUpdate.lists, nextListToUpdate];
+
+    // Set updated board data
+    const boardIndex = updatedLocalData.findIndex((board) => board.id === boardId)
+    updatedLocalData.splice(boardIndex, 1, boardToUpdate);
+
+    // Save in local storage
+
+    console.log(updatedLocalData)
+    localStorage.setItem('trelloData', JSON.stringify(updatedLocalData))
+}
+
 export const removeListFromBoard = (boardId: string, listId: string) => {
 
 }

@@ -11,7 +11,8 @@ interface Props {
     handleCardTitleChange: Function,
     listId: string,
     boardId: string,
-    handleEditCard:Function
+    handleEditCard:Function,
+    moveCardHandler: Function
  }
 function Card(
     {
@@ -20,7 +21,8 @@ function Card(
         handleCardTitleChange,
         listId,
         boardId,
-        handleEditCard
+        handleEditCard,
+        moveCardHandler
     } : Props
 ) {
     const { title, listName} = card;
@@ -40,6 +42,10 @@ function Card(
             <Button 
                 btnText='Edit'
                 onClickHandler={() => showCardDetails()}
+            />
+            <Button 
+                btnText='Move'
+                onClickHandler={(e:any) => moveCardHandler(e,card, card.id, listId, boardId )}
             />
 
             
