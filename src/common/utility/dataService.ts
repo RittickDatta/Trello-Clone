@@ -1,7 +1,7 @@
 import { Board } from "../interfaces/Board";
 
 export const checkLocalStorage = () => {
-    const isInitialState = localStorage.getItem('trelloData') === 'true';
+    let isInitialState = JSON.parse(JSON.stringify(localStorage.getItem('trelloData'))).length > 0;
     console.log(':::::::::isInitialState::::::::::', isInitialState)
     return isInitialState;
 }

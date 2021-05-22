@@ -1,5 +1,6 @@
 import { Card } from "./Card";
 
 export interface List {
-    cards: Card[]
+    title: string;
+    cards?: Card[];
 }

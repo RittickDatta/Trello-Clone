@@ -1,26 +1,36 @@
-import React, { Component } from 'react'
-import { Board as BoardsInterface } from "../../common/interfaces/Board";
+import React, { Component } from 'react';
+import { Board as BoardsInterface } from '../../common/interfaces/Board';
 
-import { loadData } from "../../common/utility/dataService";
+import { loadData } from '../../common/utility/dataService';
+import Board from '../Board/Board';
 interface State {
-    boards: BoardsInterface[]
+  boards: BoardsInterface[];
 }
 export class Boards extends Component<State> {
-    state = {
-        boards: []
-    }
+  state = {
+    boards: [],
+  };
 
-    componentDidMount(){
-        loadData();
-    }
+  componentDidMount() {
+    const loadedData = loadData();
+    this.setState(
+      {
+        boards: loadedData,
+      },
+      () => console.log(this.state.boards)
+    );
+  }
 
-    render() {
-        return (
-            <div>
-                Boards
-            </div>
-        )
-    }
+  renderBoards = (boards: BoardsInterface[]) => {
+    return boards.map((board, index) => {
+      return <Board board={board} boardSequence={index} />;
+    });
+  };
+
+  render() {
+    const { boards } = this.state;
+    return <>{this.renderBoards(boards)}</>;
+  }
 }
 
-export default Boards
+export default Boards;
