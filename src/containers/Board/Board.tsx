@@ -44,7 +44,11 @@ export class Board extends Component<Props> {
     }
 
     handleCardTitleChange = (e:any, card: Card, listId: string, boardId: string) => {
-        // Handle title change
+        // Handle title
+    }
+
+    handleEditCard = (e:any, card: Card, listId: string, boardId: string) => {
+        console.log({card, listId, boardId});
     }
 
     showCardDetails = (card: Card) => {
@@ -66,8 +70,9 @@ export class Board extends Component<Props> {
                     boardId={boardId}
                     addListHandler={this.addListHandler}
                     addCardHandler={this.addCardHandler}
-                    showCardDetails={this.showCardDetails}
+                    // showCardDetails={this.showCardDetails}
                     handleCardTitleChange={this.handleCardTitleChange}
+                    handleEditCard={this.handleEditCard}
                 />
             </div>
         )

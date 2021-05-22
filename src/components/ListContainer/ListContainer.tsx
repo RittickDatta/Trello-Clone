@@ -6,13 +6,16 @@ import List from '../List/List';
 interface Props {
     lists: ListInterface[],
     addCardHandler: Function,
-    showCardDetails: Function,
+    // showCardDetails: Function,
     addListHandler: Function,
     handleCardTitleChange: Function,
-    boardId: string
+    boardId: string,
+    handleEditCard: Function
 }
 
-function ListContainer({lists, addCardHandler, showCardDetails, addListHandler, handleCardTitleChange, boardId}:Props) {
+function ListContainer({lists, addCardHandler, 
+    // showCardDetails,
+     addListHandler, handleCardTitleChange, boardId, handleEditCard}:Props) {
 
     const renderLists = (lists: ListInterface[]) => {
         return lists && lists.map((list, index) => {
@@ -20,10 +23,11 @@ function ListContainer({lists, addCardHandler, showCardDetails, addListHandler, 
                 title={list.title}
                 cards={list.cards || []}
                 addCardHandler={addCardHandler}
-                showCardDetails={showCardDetails}
+                // showCardDetails={showCardDetails}
                 listId={list.id}
                 boardId={boardId}
                 handleCardTitleChange={handleCardTitleChange}
+                handleEditCard={handleEditCard}
             />
         })
     }
