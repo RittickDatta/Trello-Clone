@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 
 import { Board as BoardInterface} from "../../common/interfaces/Board";
 import { loadData } from '../../common/utility/dataService';
-interface State {
-    board: BoardInterface ;
+
+interface Props {
+    board: BoardInterface
 }
-export class Board extends Component<State> {
+export class Board extends Component<Props> {
 
     state = {
-        board: [],
+        board: {},
     }
 
     componentDidMount(){

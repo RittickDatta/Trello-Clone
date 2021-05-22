@@ -17,8 +17,12 @@ export const loadData = () => {
     }
 }
 
-export const saveData = (data: Board[]) => {
-    localStorage.setItem('trelloData', JSON.stringify(data))
+export const saveData = (data: Board) => {
+    let localData = localStorage.getItem('trelloData')
+    localData = localData && JSON.parse(localData) || []
+    let updatedLocalData = [...JSON.parse(JSON.stringify(localData)), data]
+    console.log(updatedLocalData)
+    localStorage.setItem('trelloData', JSON.stringify(updatedLocalData))
 }
 
 export const getBoardData = (boardId: string) => {
