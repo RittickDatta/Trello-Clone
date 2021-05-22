@@ -38,7 +38,7 @@ export const addListToBoard = (data: List, boardId: string) => {
     let boardToUpdate = updatedLocalData.filter((board) => board.id === boardId)[0];
     let updatedList;
     if(boardToUpdate.lists && boardToUpdate.lists.length > 0) {
-        updatedList = [...boardToUpdate.lists.filter((list:any) => list.id !== data.id), data]
+        updatedList = [...boardToUpdate.lists, data]
     } else {
         updatedList = [data] 
     }
@@ -67,13 +67,13 @@ export const addCardToList = (data: Card, boardId: string, listId: string) => {
     }
     listToUpdate.cards = updatedCards;
     console.log('Updated List',listToUpdate)
-    boardToUpdate.lists = [...boardToUpdate.lists.map((list:any) => list.id !== listToUpdate.id), listToUpdate];
-    console.log(boardToUpdate)
+    boardToUpdate.lists = [...boardToUpdate.lists, listToUpdate];
+    console.log(boardToUpdate);
 
     const boardIndex = updatedLocalData.findIndex((board) => board.id === boardId)
     updatedLocalData.splice(boardIndex, 1, boardToUpdate);
     console.log(updatedLocalData)
-    // localStorage.setItem('trelloData', JSON.stringify(updatedLocalData))
+    localStorage.setItem('trelloData', JSON.stringify(updatedLocalData))
 }
 
 export const removeListFromBoard = (boardId: string, listId: string) => {

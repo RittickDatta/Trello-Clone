@@ -8,16 +8,21 @@ interface Props {
     cards: CardInterface[];
     addCardHandler: Function;
     showCardDetails: Function;
-    listId: string
+    listId: string,
+    handleCardTitleChange: Function,
+    boardId: string
 }
 
-function List({title, cards, addCardHandler, showCardDetails, listId}: Props) {
+function List({title, cards, addCardHandler, showCardDetails, listId, handleCardTitleChange, boardId}: Props) {
 
     const renderCards = (cards: CardInterface[]) => {
         return cards.map((card, index) => {
             return <Card 
                 card = {card}
                 showCardDetails={showCardDetails}
+                handleCardTitleChange={handleCardTitleChange}
+                listId={listId}
+                boardId={boardId}
             />
         })
     }

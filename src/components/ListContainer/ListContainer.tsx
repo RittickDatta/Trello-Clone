@@ -7,10 +7,12 @@ interface Props {
     lists: ListInterface[],
     addCardHandler: Function,
     showCardDetails: Function,
-    addListHandler: Function
+    addListHandler: Function,
+    handleCardTitleChange: Function,
+    boardId: string
 }
 
-function ListContainer({lists, addCardHandler, showCardDetails, addListHandler}:Props) {
+function ListContainer({lists, addCardHandler, showCardDetails, addListHandler, handleCardTitleChange, boardId}:Props) {
 
     const renderLists = (lists: ListInterface[]) => {
         return lists && lists.map((list, index) => {
@@ -20,6 +22,8 @@ function ListContainer({lists, addCardHandler, showCardDetails, addListHandler}:
                 addCardHandler={addCardHandler}
                 showCardDetails={showCardDetails}
                 listId={list.id}
+                boardId={boardId}
+                handleCardTitleChange={handleCardTitleChange}
             />
         })
     }

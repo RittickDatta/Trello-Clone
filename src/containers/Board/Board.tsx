@@ -43,6 +43,10 @@ export class Board extends Component<Props> {
 
     }
 
+    handleCardTitleChange = (e:any, card: Card, listId: string, boardId: string) => {
+        // Handle title change
+    }
+
     showCardDetails = (card: Card) => {
         console.log(card);
         // CardDetails
@@ -59,9 +63,11 @@ export class Board extends Component<Props> {
 
                 <ListContainer
                     lists={board.lists || []}
+                    boardId={boardId}
                     addListHandler={this.addListHandler}
                     addCardHandler={this.addCardHandler}
                     showCardDetails={this.showCardDetails}
+                    handleCardTitleChange={this.handleCardTitleChange}
                 />
             </div>
         )
